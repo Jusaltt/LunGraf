@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShieldGuard Pro - Ultimate Protection for Your Digital Life</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0e1a;
+            color: #e8eaf6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Grid Background */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .orb:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #00ff9d, transparent);
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+        }
+
+        .orb:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #00d4ff, transparent);
+            bottom: -100px;
+            right: -100px;
+            animation-delay: 7s;
+        }
+
+        .orb:nth-child(3) {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #7c3aed, transparent);
+            top: 40%;
+            right: 20%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(40px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.9); }
+            75% { transform: translate(50px, 20px) scale(1.05); }
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 26, 0.9);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+            padding: 20px 50px;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo i {
+            color: #00ff9d;
+            filter: drop-shadow(0 0 10px #00ff9d);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ff9d;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #00ff9d;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .cta-nav {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #00ff9d, #00d4ff);
+            color: #0a0e1a;
+            font-weight: 700;
+            border-radius: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 255, 157, 0.3);
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 255, 157, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 50px 80px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #00ff9d;
+            margin-bottom: 25px;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .hero-text .highlight {
+            background: linear-gradient(135deg, #00ff9d, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 35px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff9d, #00d4ff);
+            color: #0a0e1a;
+            box-shadow: 0 8px 30px rgba(0, 255, 157, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 255, 157, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #00ff9d;
+            transform: translateY(-3px);
+        }
+
+        .trust-badges {
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        .trust-badge i {
+            color: #00ff9d;
+            font-size: 1.2rem;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .shield-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shield-icon {
+            font-size: 18rem;
+            color: #00ff9d;
+            filter: drop-shadow(0 0 50px rgba(0, 255, 157, 0.5));
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ff9d, transparent);
+            animation: scan 3s infinite ease-in-out;
+            box-shadow: 0 0 20px #00ff9d;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            50% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 50px;
+            background: rgba(0, 255, 157, 0.02);
+            position: relative;
+            z-index: 10;
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 255, 157, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00ff9d, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-subtitle {
+            color: #00ff9d;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            padding: 45px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #00ff9d, #00d4ff);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(0, 255, 157, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 255, 157, 0.1);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(0, 255, 157, 0.2), rgba(0, 212, 255, 0.2));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #00ff9d;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(0, 255, 157, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Threat Protection Section */
+        .threat-section {
+            padding: 120px 50px;
+            background: linear-gradient(135deg, rgba(0, 255, 157, 0.05), rgba(124, 58, 237, 0.05));
+            position: relative;
+            z-index: 10;
+        }
+
+        .threat-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .threat-card {
+            background: rgba(10, 14, 26, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .threat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(244, 67, 54, 0.5);
+            box-shadow: 0 15px 50px rgba(244, 67, 54, 0.2);
+        }
+
+        .threat-icon {
+            font-size: 3rem;
+            color: #f44336;
+            margin-bottom: 20px;
+        }
+
+        .threat-card h4 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .threat-card p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 50px;
+            text-align: center;
+            background: linear-gradient(135deg, #00ff9d, #00d4ff);
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            color: #0a0e1a;
+            margin-bottom: 25px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .cta-section p {
+            font-size: 1.4rem;
+            color: rgba(10, 14, 26, 0.8);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section .btn {
+            background: #0a0e1a;
+            color: #00ff9d;
+            box-shadow: 0 10px 40px rgba(10, 14, 26, 0.3);
+        }
+
+        .cta-section .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(10, 14, 26, 0.5);
+        }
+
+        .price-tag {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            color: rgba(10, 14, 26, 0.7);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(20px);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 80px 50px 40px;
+            position: relative;
+            z-index: 10;
+            border-top: 1px solid rgba(0, 255, 157, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h3 {
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #00ff9d;
+            transform: translateX(5px);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-icons a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons a:hover {
+            background: #00ff9d;
+            color: #0a0e1a;
+            transform: translateY(-5px);
+            border-color: #00ff9d;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+
+            .section-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 25px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 100px 25px 60px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .features,
+            .threat-section,
+            .cta-section {
+                padding: 80px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Grid Background -->
+    <div class="grid-background"></div>
+
+    <!-- Animated Orbs -->
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                ShieldGuard Pro
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#protection">Protection</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="#download" class="cta-nav">Download Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <i class="fas fa-award"></i>
+                    Rated #1 Antivirus of 2025
+                </div>
+                <h1>
+                    Total <span class="highlight">Protection</span> for Your Digital World
+                </h1>
+                <p>
+                    Advanced AI-powered security that blocks viruses, ransomware, spyware, and online threats before they reach you. Stay protected 24/7 with real-time defense.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Get Protected Now
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <i class="fas fa-play-circle"></i> Watch Demo
+                    </a>
+                </div>
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <i class="fas fa-check-circle"></i>
+                        30-Day Money Back
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-users"></i>
+                        500M+ Users Worldwide
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-star"></i>
+                        4.9/5 Rating
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="shield-container">
+                    <i class="fas fa-shield-alt shield-icon"></i>
+                    <div class="scan-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Threat Detection Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5B+</div>
+                <div class="stat-label">Threats Blocked Daily</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Real-Time Protection</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0.1s</div>
+                <div class="stat-label">Scan Response Time</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <div class="section-subtitle">Powerful Protection</div>
+            <h2 class="section-title">Everything You Need to Stay Safe</h2>
+            <p class="section-description">
+                Comprehensive security suite with cutting-edge technology designed to protect all aspects of your digital life.
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-virus-slash"></i>
+                </div>
+                <h3>Real-Time Virus Protection</h3>
+                <p>Advanced AI algorithms detect and neutralize viruses, malware, and trojans before they can harm your system. Always-on protection that works silently in the background.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Ransomware Shield</h3>
+                <p>Multi-layer defense against ransomware attacks. Automatically backs up critical files and prevents unauthorized encryption of your data.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Web Protection</h3>
+                <p>Browse safely with intelligent URL filtering that blocks malicious websites, phishing attempts, and dangerous downloads before you click.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+                <h3>Email Security</h3>
+                <p>Scan incoming emails for threats, block spam, and filter out phishing attempts. Keep your inbox clean and secure.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h3>Smart Firewall</h3>
+                <p>Next-generation firewall monitors all network traffic, blocks suspicious connections, and prevents unauthorized access to your device.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <h3>Privacy Protection</h3>
+                <p>Secure your online identity with VPN, webcam protection, and anti-tracking technology. Browse anonymously and stay private.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threat Protection Section -->
+    <section class="threat-section" id="protection">
+        <div class="section-header">
+            <div class="section-subtitle">Total Defense</div>
+            <h2 class="section-title">Protected Against All Threats</h2>
+        </div>
+
+        <div class="threat-grid">
+            <div class="threat-card">
+                <div class="threat-icon"><i class="fas fa-bug"></i></div>
+                <h4>Viruses & Worms</h4>
+                <p>Blocks all types of computer viruses and self-replicating worms</p>
+            </div>
+            <div class="threat-card">
+                <div class="threat-icon"><i class="fas fa-user-lock"></i></div>
+                <h4>Ransomware</h4>
+                <p>Prevents data encryption and ransom demands</p>
+            </div>
+            <div class="threat-card">
+                <div class="threat-icon"><i class="fas fa-eye-slash"></i></div

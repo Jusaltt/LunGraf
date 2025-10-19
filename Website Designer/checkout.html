@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C&C - Checkout</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./CSS/style.css">
+  <link rel="stylesheet" href="./CSS/utilities.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - CoreCanvas Media</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      /* Glass Checkout Page Styling */
+      body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(120deg, #000000, #746303, #000000);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .glass-container {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+        padding: 40px;
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      p.desc {
+        color: #ccc;
+        margin-bottom: 25px;
+      }
+
+      .form-group,
+      .form-group option {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        margin-bottom: 20px;
+        color: #ffcc00;
+      }
+
+      label {
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
+
+      input,
+      select {
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        outline: none;
+      }
+
+      input::placeholder {
+        color: #bbb;
+      }
+
+      .item-info {
+        margin-bottom: 25px;
+      }
+
+      .item-name {
+        font-size: 1.2rem;
+      }
+
+      .item-price {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #fdffff;
+      }
+
+      .checkout-btn {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(90deg, #000000, #efefef);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .checkout-btn:hover {
+        background: linear-gradient(90deg, #f2f2f2, #000000);
+      }
+
+      #payment-info {
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: none;
+        text-align: left;
+        animation: fadeIn 0.4s ease forwards;
+      }
+
+      #payment-info h3 {
+        margin-bottom: 10px;
+        color: #ffffff;
+      }
+
+      #payment-info p {
+        margin: 6px 0;
+      }
+
+      .note {
+        color: #bbb;
+        font-size: 0.9rem;
+        margin-top: 10px;
+      }
+
+      .back-home {
+        display: inline-block;
+        margin-top: 20px;
+        color: #000000;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .back-home:hover {
+        color: #747474;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+<body>
+
+  <div class="glass-container">
+    <h1>Checkout</h1>
+    <p class="desc">Complete your order by filling the form below.</p>
+
+    <div class="item-info">
+      <p class="item-name">Custom Website Design</p>
+      <p class="item-price">₦250,000</p>
+    </div>
+
+    <form id="checkout-form">
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="order-type">Website Type</label>
+        <select id="order-type" required>
+          <option value="">Select...</option>
+          <option value="custom">Custom Website</option>
+          <option value="template">Pre-made Template</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="payment">Payment Method</label>
+        <select id="payment" required>
+          <option value="">Select...</option>
+          <option value="bank">Bank Transfer</option>
+        </select>
+      </div>
+
+      <button type="button" id="checkout-btn" class="checkout-btn">Checkout</button>
+    </form>
+
+    <div id="payment-info">
+      <h3>Payment Information</h3>
+      <p><strong>Bank Name:</strong> Zenith Bank</p>
+      <p><strong>Account Name:</strong> CoreCanvas Media</p>
+      <p><strong>Account Number:</strong> 1234567890</p>
+      <p><strong>Email:</strong> support@corecanvas.com</p>
+      <p><strong>Phone:</strong> +234 812 345 6789</p>
+      <p class="note">Please send proof of payment via the chat or contact page after transfer.</p>
+    </div>
+
+    <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </div>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>CoreCanvas Media</h3>
+        <p>Crafting unique, custom-made websites that blend creativity and functionality.</p>
+      </div>
+      <div class="footer-socials">
+        <h4>Follow Us On</h4>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Code&Canvas. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+  <script>
+    // Navbar dropdown toggle
+    const navbar = document.getElementById("navbar");
+    const logoToggle = document.getElementById("logo-toggle");
+    const dropdown = navbar.querySelector(".dropdown");
+    let closeTimer;
+
+    function setOpen(isOpen) {
+      if (isOpen) {
+        navbar.classList.add("open");
+        logoToggle.setAttribute("aria-expanded", "true");
+      } else {
+        navbar.classList.remove("open");
+        logoToggle.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    logoToggle.addEventListener("click", e => {
+      e.preventDefault();
+      setOpen(!navbar.classList.contains("open"));
+    });
+    navbar.addEventListener("mouseenter", () => { clearTimeout(closeTimer); setOpen(true); });
+    navbar.addEventListener("mouseleave", () => { closeTimer = setTimeout(() => setOpen(false), 600); });
+    document.addEventListener("click", e => { if (!navbar.contains(e.target)) setOpen(false); });
+
+
+    // CheckOut
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const paymentInfo = document.getElementById('payment-info');
+
+    checkoutBtn.addEventListener('click', () => {
+      const name = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const orderType = document.getElementById('order-type').value;
+      const payment = document.getElementById('payment').value;
+
+      if (!name || !email || !orderType || !payment) {
+        alert('Please fill in all fields before proceeding.');
+        return;
+      }
+
+      paymentInfo.style.display = 'block';
+      paymentInfo.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+
+</html>

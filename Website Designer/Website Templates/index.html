@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexaBank - Your Digital Banking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+            color: #e8eaf6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated background elements */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-orb:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #667eea, transparent);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-orb:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #764ba2, transparent);
+            bottom: -50px;
+            right: -50px;
+            animation-delay: 5s;
+        }
+
+        .bg-orb:nth-child(3) {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #4facfe, transparent);
+            top: 40%;
+            right: 20%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 10px); }
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 20, 40, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px 40px;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links li a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .notification-btn:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            background: #f44336;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        /* Main Dashboard */
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 40px 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .welcome-section {
+            margin-bottom: 40px;
+        }
+
+        .welcome-section h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .welcome-section p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .card-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .card-subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+        }
+
+        .card-change {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .card-change.positive {
+            color: #4caf50;
+        }
+
+        .card-change.negative {
+            color: #f44336;
+        }
+
+        /* Account Card */
+        .account-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .account-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .account-number {
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .account-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .account-detail-item {
+            font-size: 0.85rem;
+        }
+
+        .account-detail-label {
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .account-detail-value {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        /* Transactions */
+        .transactions-card {
+            grid-column: 1;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .transaction-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(5px);
+        }
+
+        .transaction-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .transaction-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .transaction-icon.sent {
+            background: rgba(244, 67, 54, 0.15);
+            color: #f44336;
+        }
+
+        .transaction-icon.received {
+            background: rgba(76, 175, 80, 0.15);
+            color: #4caf50;
+        }
+
+        .transaction-details h4 {
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .transaction-details p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .transaction-amount {
+            text-align: right;
+        }
+
+        .transaction-amount .amount {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .transaction-amount.sent .amount {
+            color: #f44336;
+        }
+
+        .transaction-amount.received .amount {
+            color: #4caf50;
+        }
+
+        .transaction-amount .date {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            grid-column: 2;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .action-btn:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Cards Section */
+        .cards-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .view-all {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .view-all:hover {
+            color: #764ba2;
+        }
+
+        .credit-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .credit-card {
+            height: 200px;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .credit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .credit-card.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .credit-card.secondary {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .credit-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .card-chip {
+            width: 50px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .card-number-display {
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .card-info-display {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-holder,
+        .card-expiry {
+            font-size: 0.85rem;
+        }
+
+        .card-label {
+            opacity: 0.7;
+            margin-bottom: 5px;
+            font-size: 0.75rem;
+        }
+
+        .card-value {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .transactions-card,
+            .quick-actions {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .dashboard {
+                padding: 90px 20px 20px;
+            }
+
+            .welcome-section h1 {
+                font-size: 2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .credit-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Orbs -->
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                NexaBank
+            </div>
+            <ul class="nav-links">
+                <li><a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#accounts"><i class="fas fa-wallet"></i> Accounts</a></li>
+                <li><a href="#transfers"><i class="fas fa-exchange-alt"></i> Transfers</a></li>
+                <li><a href="#cards"><i class="fas fa-credit-card"></i> Cards</a></li>
+                <li><a href="#loans"><i class="fas fa-hand-holding-usd"></i> Loans</a></li>
+                <li><a href="#support"><i class="fas fa-headset"></i> Support</a></li>
+            </ul>
+            <div class="user-section">
+                <div class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-avatar">JD</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1>Welcome back, John! 👋</h1>
+            <p>Here's what's happening with your accounts today.</p>
+        </div>
+
+        <!-- Account Overview Cards -->
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Total Balance</span>
+                    <div class="card-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                </div>
+                <div class="card-amount">$48,574.32</div>
+                <div class="card-subtitle">Across all accounts</div>
+                <div class="card-change positive">
+                    <i class="fas fa-arrow-up"></i> +8.2% from last month
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Monthly Income</span>
+                    <div class="card-icon">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                </div>
+                <div class="card-amount">$12,450.00</div>
+                <div class="card-subtitle">This month</div>
+                <div class="card-change positive">
+                    <i class="fas fa-arrow-up"></i> +3.5% from last month
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Monthly Expenses</span>
+                    <div class="card-icon">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                </div>
+                <div class="card-amount">$8,234.50</div>
+                <div class="card-subtitle">This month</div>
+                <div class="card-change negative">
+                    <i class="fas fa-arrow-down"></i> -2.1% from last month
+                </div>
+            </div>
+        </div>
+
+        <!-- Primary Account Card -->
+        <div class="cards-grid">
+            <div class="card account-card">
+                <div class="card-header">
+                    <span class="card-title" style="color: rgba(255,255,255,0.9);">Primary Checking</span>
+                    <i class="fas fa-university" style="font-size: 1.5rem;"></i>
+                </div>
+                <div class="card-amount">$24,856.74</div>
+                <div class="account-number">**** **** **** 4829</div>
+                <div class="account-details">
+                    <div class="account-detail-item">
+                        <div class="account-detail-label">Account Holder</div>
+                        <div class="account-detail-value">John Doe</div>
+                    </div>
+                    <div class="account-detail-item">
+                        <div class="account-detail-label">Account Type</div>
+                        <div class="account-detail-value">Checking</div>
+                    </div>
+                    <div class="account-detail-item">
+                        <div class="account-detail-label">Status</div>
+                        <div class="account-detail-value">Active</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="two-column">
+            <!-- Recent Transactions -->
+            <div class="card transactions-card">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Transactions</h2>
+                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon received">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Salary Deposit</h4>
+                            <p>Tech Corp Inc.</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount received">
+                        <div class="amount">+$5,400.00</div>
+                        <div class="date">Today, 09:30 AM</div>
+                    </div>
+                </div>
+
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon sent">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Rent Payment</h4>
+                            <p>Sunset Apartments</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount sent">
+                        <div class="amount">-$1,850.00</div>
+                        <div class="date">Oct 18, 2025</div>
+                    </div>
+                </div>
+
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon sent">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Amazon Purchase</h4>
+                            <p>Online Shopping</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount sent">
+                        <div class="amount">-$234.99</div>
+                        <div class="date">Oct 17, 2025</div>
+                    </div>
+                </div>
+
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon received">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Freelance Payment</h4>
+                            <p>Design Project</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount received">
+                        <div class="amount">+$1,250.00</div>
+                        <div class="date">Oct 15, 2025</div>
+                    </div>
+                </div>
+
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon sent">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Restaurant</h4>
+                            <p>Bella Italia</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount sent">
+                        <div class="amount">-$85.50</div>
+                        <div class="date">Oct 14, 2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card quick-actions">
+                <h2 class="section-title" style="margin-bottom: 25px;">Quick Actions</h2>
+                <button class="action-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Send Money
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-download"></i>
+                    Request Payment
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-exchange-alt"></i>
+                    Transfer Funds
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-mobile-alt"></i>
+                    Mobile Top-up
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    Pay Bills
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-chart-line"></i>
+                    View Analytics
+                </button>
+            </div>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="cards-section">
+            <div class="section-header">
+                <h2 class="section-title">My Cards</h2>
+                <a href="#" class="view-all">Manage Cards <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="credit-cards">
+                <div class="credit-card primary">
+                    <div class="card-chip"></div>
+                    <div class="card-number-display">5274 8392 1047 8293</div>
+                    <div class="card-info-display">
+                        <div class="card-holder">
+                            <div class="card-label">CARD HOLDER</div>
+                            <div class="card-value">JOHN DOE</div>
+                        </div>
+                        <div class="card-expiry">
+                            <div class="card-label">EXPIRES</div>
+                            <div class="card-value">12/27</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <i class="fab fa-cc-visa" style="font-size: 2.5rem;"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="credit-card secondary">
+                    <div class="card-chip"></div>
+                    <div class="card-number-display">4892 7103 5648 2910</div>
+                    <div class="card-info-display">
+                        <div class="card-holder">
+                            <div class="card-label">CARD HOLDER</div>
+                            <div class="card-value">JOHN DOE</div>
+                        </div>
+                        <div class="card-expiry">
+                            <div class="card-label">EXPIRES</div>
+                            <div class="card-value">08/26</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <i class="fab fa-cc-mastercard" style="font-size: 2.5rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

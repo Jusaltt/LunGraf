@@ -1,0 +1,213 @@
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f8ff;
+      color: #222;
+    }
+
+    /* Navbar */
+    nav {
+      background: #111;
+      color: #fff;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: #4e9af1;
+      transition: color 0.3s;
+    }
+
+    nav .logo:hover {
+      color: #fff;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #4e9af1;
+    }
+
+    /* Hero with animated gradient */
+    header {
+      height: 65vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(-45deg, #4e9af1, #3b5998, #6c63ff, #4e9af1);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+      color: #fff;
+      padding: 20px;
+    }
+
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      max-width: 700px;
+      line-height: 1.3;
+      animation: fadeInDown 1.5s ease;
+    }
+
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-40px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Pricing */
+    .pricing {
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    .pricing h2 {
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .card:nth-child(1) {animation-delay: 0.2s;}
+    .card:nth-child(2) {animation-delay: 0.4s;}
+    .card:nth-child(3) {animation-delay: 0.6s;}
+
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(40px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.6rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .card .price {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #4e9af1;
+      font-weight: bold;
+    }
+
+    .card button {
+      background: #4e9af1;
+      border: none;
+      padding: 10px 20px;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .card button:hover {
+      background: #3b5998;
+    }
+
+    /* Highlighted Pro Plan */
+    .highlight {
+      border: 2px solid #4e9af1;
+    }
+
+    .highlight::before {
+      content: "Best Value";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #4e9af1;
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 60px 20px;
+      text-align: center;
+      background: #4e9af1;
+      color: #fff;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .cta button {
+      background: #fff;
+      color: #4e9af1;
+      border: none;
+      padding: 12px 25px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .cta button:hover {
+      background: #3b5998;
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      margin-top: 0;
+    }
